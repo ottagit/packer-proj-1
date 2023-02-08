@@ -8,16 +8,16 @@
           "access_key": "{{user `aws_access_key`}}",
           "secret_key": "{{user `aws_secret_key`}}",
           "region": "ap-south-1",
-          "source_ami": "ami-0912f71e06545ad88",
+          "source_ami": "ami-01a4f99c4ac11b03c",
           "instance_type": "t2.micro",
           "ssh_username": "ec2-user",
           "ami_name": "packer-example {{timestamp | clean_resource_name}}"
   }],
   "provisioners": [{
           "type": "shell",
-          "inline": [
-                  "sudo yum -y install nginx",
-                  "sudo mkdir -p /var/www/website"
+          "scripts": [
+                  "install.sh",
+                  "post-install.sh"
           ]
   }]
 }
