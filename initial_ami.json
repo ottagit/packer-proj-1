@@ -13,12 +13,26 @@
           "ssh_username": "ec2-user",
           "ami_name": "packer-example {{timestamp | clean_resource_name}}"
   }],
-  "provisioners": [{
-          "type": "shell",
-          "scripts": [
+  "provisioners": [
+          {
+            "type": "file",
+            "source": "index.html",
+            "destination": "/tmp/index.html"
+          },
+          {
+            "type": "shell",
+            "inline": [
+                "sudo mkdir -p /var/www/website",
+                "sudo mv /tmp/index.html /var/www/website"
+            ]
+          },
+          {
+            "type": "shell",
+            "scripts": [
                   "install.sh",
                   "post-install.sh"
-          ]
-  }]
+            ]
+          }
+  ]
 }
   
